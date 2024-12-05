@@ -10,12 +10,12 @@ interface ProvidersProps {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    // <SessionProvider>
-    <NextUIProvider>
-      <ThemeProvider attribute="class" defaultTheme="dark">
-        {children}
-      </ThemeProvider>
-    </NextUIProvider>
-    // </SessionProvider>
+    <SessionProvider>
+      <NextUIProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          {children}
+        </ThemeProvider>
+      </NextUIProvider>
+    </SessionProvider>
   );
 }

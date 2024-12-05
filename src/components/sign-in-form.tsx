@@ -9,7 +9,7 @@ import * as actions from "@/actions";
 import { SubmitButton, PasswordInput } from "@/components/common";
 
 export default function SignInForm() {
-  const [formState, action] = useFormState(actions.signIn, {
+  const [formState, action] = useFormState(actions.emailSignIn, {
     errors: {},
   });
   return (
@@ -20,19 +20,19 @@ export default function SignInForm() {
         placeholder="Enter your email"
         type="text"
         variant="bordered"
-        isInvalid={!!formState.errors.email}
-        errorMessage={formState.errors.email?.join(", ")}
+        isInvalid={!!formState?.errors.email}
+        errorMessage={formState?.errors.email?.join(", ")}
       />
       <PasswordInput
         name="password"
         label="Password"
         placeholder="Enter your password"
-        isInvalid={!!formState.errors.password}
-        errorMessage={formState.errors.password?.join(", ")}
+        isInvalid={!!formState?.errors.password}
+        errorMessage={formState?.errors.password?.join(", ")}
       />
-      {formState.errors._form && (
-        <div className="rounded p-2 bg-red-200 border border-red-400">
-          {formState.errors._form.join(", ")}
+      {formState?.errors._form && (
+        <div className="rounded-xl text-sm px-3 py-2 bg-red-200 dark:bg-red-800">
+          {formState?.errors._form.join(", ")}
         </div>
       )}
       <div className="flex items-center justify-between px-1 py-2">
