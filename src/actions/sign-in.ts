@@ -1,8 +1,11 @@
 "use server";
 
-import { z } from "zod";
+import { signIn } from "@/auth";
+import { signInSchema } from "@/schemas";
+import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
+import { redirect } from "next/navigation";
 
-interface SignUserIn {
+interface SignUserInErrors {
   errors: {
     email?: string[];
     password?: string[];
@@ -10,49 +13,53 @@ interface SignUserIn {
   };
 }
 
-const signUserSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: "Email cannot be empty" })
-    .email("This is not a valid email."),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" })
-    .max(16, { message: "Password cannot be longer than 16 characters" })
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter",
-    })
-    .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter",
-    })
-    .regex(/[0-9]/, { message: "Password must contain at least one number" })
-    .regex(/[^A-Za-z0-9]/, {
-      message: "Password must contain at least one special character",
-    }),
-});
-
-export async function signIn(
-  _: SignUserIn,
+export async function emailSignIn(
+  _: SignUserInErrors,
   formData: FormData
-): Promise<SignUserIn> {
-  const validationResult = signUserSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
+): Promise<SignUserInErrors | void> {
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  // Validate the form data
+  const validationResult = signInSchema.safeParse({
+    email,
+    password,
   });
+
   if (!validationResult.success) {
     return {
       errors: validationResult.error.flatten().fieldErrors,
     };
   }
-  return {
-    errors: {},
-  };
+  try {
+    // Sign in the user with the provided credentials
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+  } catch (error: any) {
+    if (error?.code === "3rd-party") {
+      return {
+        errors: {
+          _form: ["You have signed up with a third-party provider"],
+        },
+      };
+    }
+    return {
+      errors: {
+        _form: ["Invalid email or password"],
+      },
+    };
+  }
+
+  redirect(DEFAULT_LOGGED_IN_REDIRECT);
 }
 
 export async function githubSignIn() {
-  console.log("Github Sign in");
+  return signIn("github", { redirectTo: DEFAULT_LOGGED_IN_REDIRECT });
 }
 
 export async function googleSignIn() {
-  console.log("Google Sign in");
+  return signIn("google", { redirectTo: DEFAULT_LOGGED_IN_REDIRECT });
 }

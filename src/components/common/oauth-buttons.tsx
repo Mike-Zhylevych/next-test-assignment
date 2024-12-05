@@ -1,7 +1,10 @@
+"use client";
+
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
 
 import { Github, Google } from "@/app/icons";
+import * as actions from "@/actions";
 
 export function OauthButtons() {
   return (
@@ -12,12 +15,26 @@ export function OauthButtons() {
         <Divider className="flex-1" />
       </div>
       <div className="flex flex-col gap-2">
-        <Button startContent={<Google />} variant="bordered">
-          Continue with Google
-        </Button>
-        <Button startContent={<Github />} variant="bordered">
-          Continue with Github
-        </Button>
+        <form action={actions.googleSignIn}>
+          <Button
+            type="submit"
+            startContent={<Google />}
+            variant="bordered"
+            className="w-full"
+          >
+            Continue with Google
+          </Button>
+        </form>
+        <form action={actions.githubSignIn}>
+          <Button
+            type="submit"
+            startContent={<Github />}
+            variant="bordered"
+            className="w-full"
+          >
+            Continue with Github
+          </Button>
+        </form>
       </div>
     </>
   );
