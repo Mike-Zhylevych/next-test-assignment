@@ -2,8 +2,7 @@
 
 import { useFormState } from "react-dom";
 import { Input } from "@nextui-org/input";
-import { Checkbox } from "@nextui-org/checkbox";
-import { Link } from "@nextui-org/link";
+import TermsAndPrivacyPolicy from "@/components/terms-and-privacy-policy";
 
 import * as actions from "@/actions";
 import { SubmitButton, PasswordInput } from "@/components/common";
@@ -55,12 +54,7 @@ export default function SignUpForm() {
           {formState.errors._form.join(", ")}
         </div>
       )}
-      <div className="flex items-center justify-between px-1 py-2">
-        <Checkbox name="agree" size="sm">
-          I agree with the <Link href="/terms">Terms</Link> and{" "}
-          <Link href="/privacy">Privacy Policy</Link>
-        </Checkbox>
-      </div>
+      <TermsAndPrivacyPolicy />
       <SubmitButton>Sign Up</SubmitButton>
     </form>
   );

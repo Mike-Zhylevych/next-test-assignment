@@ -1,16 +1,18 @@
-import { auth } from "@/auth";
 import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/avatar";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+
 import * as actions from "@/actions";
 
-export default async function HeaderAuth() {
-  const session = await auth();
-  if (!session) return null;
+interface HeaderAuthProps {
+  image?: string | null;
+}
+
+export default function HeaderAuth({ image }: HeaderAuthProps) {
   return (
     <Popover placement="left">
       <PopoverTrigger>
-        <Avatar src={session?.user?.image || ""} />
+        <Avatar src={image || ""} />
       </PopoverTrigger>
       <PopoverContent>
         <div className="p-4">

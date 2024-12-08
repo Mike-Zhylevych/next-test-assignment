@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import {
@@ -16,16 +17,22 @@ export default auth((req) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
 
+  // Create a response object
+  const response = NextResponse.next();
+
+  // Set custom header with current path
+  response.headers.set("x-current-path", nextUrl.pathname);
+
   // Allow API routes to be accessed without authentication
   if (isApiAuthRoute) {
-    return null;
+    return response;
   }
   if (isAuthRoute) {
     // If user is authenticated redirect user from login or register pages
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGGED_IN_REDIRECT, nextUrl));
     }
-    return null;
+    return response;
   }
 
   // Redirect to login page if user is not authenticated
@@ -33,7 +40,7 @@ export default auth((req) => {
     return Response.redirect(new URL("/sign-in", nextUrl));
   }
 
-  return null;
+  return response;
 });
 
 export const config = {
