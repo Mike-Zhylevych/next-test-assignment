@@ -6,6 +6,7 @@ export const publicRoutes = ["/"];
 
 /**
  * List of routes for user authentication
+ * the authentification user will be redirected to the default redirect route
  * @type {string[]}
  */
 export const authRoutes = ["/sign-in", "/sign-up"];
