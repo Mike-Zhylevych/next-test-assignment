@@ -7,7 +7,7 @@ import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
 import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 
-interface SignUserUp {
+interface SignUserUpErrors {
   errors: {
     username?: string[];
     email?: string[];
@@ -18,9 +18,9 @@ interface SignUserUp {
 }
 
 export async function signUp(
-  _: SignUserUp,
+  _: SignUserUpErrors,
   formData: FormData
-): Promise<SignUserUp> {
+): Promise<SignUserUpErrors> {
   const username = formData.get("username");
   const email = formData.get("email");
   const password = formData.get("password");
