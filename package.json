@@ -26,6 +26,7 @@
     "@nextui-org/link": "^2.0.35",
     "@nextui-org/modal": "^2.0.41",
     "@nextui-org/navbar": "^2.0.37",
+    "@nextui-org/pagination": "^2.2.4",
     "@nextui-org/popover": "^2.1.29",
     "@nextui-org/progress": "^2.0.34",
     "@nextui-org/switch": "^2.0.34",
@@ -44,7 +45,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
