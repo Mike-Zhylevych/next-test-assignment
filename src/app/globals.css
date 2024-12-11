@@ -8,3 +8,10 @@
 .dark {
   background: var(--background);
 }
+
+.dark .apexcharts-text.apexcharts-datalabel-value {
+  fill: #fff !important;
+}
+.dark .apexcharts-text.apexcharts-datalabel-label {
+  fill: #fff !important;
+}

@@ -15,8 +15,8 @@ export async function GET(req: NextRequest) {
 
   try {
     const transactions = await db.transaction.findMany({
-      skip,
-      take,
+      skip: searchParams.get("limit") ? skip : undefined,
+      take: searchParams.get("limit") ? take : undefined,
       orderBy: {
         createdAt: "desc",
       },

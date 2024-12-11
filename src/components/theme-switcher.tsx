@@ -24,7 +24,7 @@ const ThemeSwitcher = () => {
       color="secondary"
       startContent={<Moon />}
       endContent={<Sun />}
-    ></Switch>
+    />
   );
 };
 
