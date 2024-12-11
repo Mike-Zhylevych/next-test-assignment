@@ -78,7 +78,7 @@ async function main() {
     const userId = "4322b15c-fc1d-4d3d-a822-5811bf53d486";
     const transactions = [];
 
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 1000; i++) {
       const isIncome = Math.random() > 0.5;
       const category = isIncome
         ? createdIncomeCategories[
@@ -96,7 +96,11 @@ async function main() {
         notes: `Transaction ${i}`,
         userId: userId,
         categoryId: category.id,
-        createdAt: new Date(),
+        createdAt: new Date(
+          2024,
+          Math.floor(Math.random() * 12),
+          Math.floor(Math.random() * 30)
+        ),
       });
     }
 

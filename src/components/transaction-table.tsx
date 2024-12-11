@@ -23,7 +23,7 @@ import {
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { DEFAULT_ROWS_PER_PAGE } from "@/constants";
-import { Transaction } from "@prisma/client";
+import { Transaction, Category } from "@prisma/client";
 
 import { Pagination } from "@nextui-org/pagination";
 import { Chip } from "@nextui-org/chip";
@@ -46,6 +46,8 @@ const INITIAL_VISIBLE_COLUMNS = [
   "notes",
 ];
 
+type TransactionWithCategory = Transaction & { category: Category | null };
+
 export default function TransactionTable() {
   const [state, setState] = useState({
     page: 1,
@@ -53,7 +55,9 @@ export default function TransactionTable() {
     notes: "",
   });
   const [loading, setLoading] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<TransactionWithCategory[]>(
+    []
+  );
   const [totalTransactions, setTotalTransactions] = useState(0);
 
   const fetchData = useCallback(
@@ -100,7 +104,7 @@ export default function TransactionTable() {
   }, [visibleColumns]);
 
   const renderCell = useCallback(
-    (transaction: Transaction, columnKey: string) => {
+    (transaction: TransactionWithCategory, columnKey: string) => {
       switch (columnKey) {
         case "createdAt":
           if (!transaction?.createdAt) return null;
@@ -126,8 +130,8 @@ export default function TransactionTable() {
             </Chip>
           );
         case "category":
-          if (!transaction?.category) return null;
-          return transaction?.category?.name;
+          if (!transaction.category) return null;
+          return transaction.category.name;
         default:
           return transaction[columnKey];
       }
@@ -234,7 +238,7 @@ export default function TransactionTable() {
               className="overflow-scroll"
             >
               {(item) => (
-                <TableRow key={item?.id}>
+                <TableRow key={item.id}>
                   {(columnKey) => (
                     <TableCell>
                       {renderCell(item, columnKey as string)}
