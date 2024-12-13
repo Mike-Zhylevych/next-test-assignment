@@ -1,6 +1,3 @@
-process.env.DATABASE_URL =
-  "postgresql://postgres@localhost:5432/postgres?schema=public";
-
 const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
@@ -46,9 +43,10 @@ const expenseCategories = [
 
 async function main() {
   try {
-    // Delete existing categories and transactions
+    // Delete existing categories transactions and users
     await prisma.transaction.deleteMany({});
     await prisma.category.deleteMany({});
+    await prisma.user.deleteMany({});
 
     // Insert income categories
     const createdIncomeCategories = [];
@@ -74,8 +72,17 @@ async function main() {
       createdExpenseCategories.push(createdCategory);
     }
 
+    // Create a user
+    await prisma.user.create({
+      data: {
+        id: "4322b15c-fc1d-4d3d-a822-5811bf53d486",
+        email: "test@test.com",
+      },
+    });
+
     // Create transactions
     const userId = "4322b15c-fc1d-4d3d-a822-5811bf53d486";
+
     const transactions = [];
 
     for (let i = 0; i < 1000; i++) {
