@@ -35,7 +35,11 @@ export function PasswordInput({
       validationBehavior="aria"
       type={isVisible ? "text" : "password"}
       endContent={
-        <button type="button" onClick={toggleVisibility}>
+        <button
+          type="button"
+          onClick={toggleVisibility}
+          aria-label="toggle password visibility"
+        >
           {isVisible ? <EyeClosed /> : <EyeOpen />}
         </button>
       }

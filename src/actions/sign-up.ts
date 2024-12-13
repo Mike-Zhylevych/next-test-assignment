@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "@/db";
+import { signIn } from "@/auth";
 import bcrypt from "bcryptjs";
 import { signUpSchema } from "@/schemas";
 import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
-import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 
 interface SignUserUpErrors {
@@ -61,8 +61,8 @@ export async function signUp(
         password: hashedPassword,
       },
     });
+    // eslint-disable-next-line
   } catch (error: unknown) {
-    console.error(error);
     return {
       errors: {
         _form: ["Failed to create a new user"],
@@ -76,8 +76,8 @@ export async function signUp(
       password,
       redirect: false,
     });
+    // eslint-disable-next-line
   } catch (error: unknown) {
-    console.error(error);
     return {
       errors: {
         _form: ["Failed to sign in the user"],

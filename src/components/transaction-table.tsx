@@ -36,6 +36,14 @@ const columns = [
   { name: "NOTES", uid: "notes", sortable: false },
 ];
 
+type columnKey =
+  | "createdAt"
+  | "amount"
+  | "type"
+  | "category"
+  | "payee"
+  | "notes";
+
 const INITIAL_VISIBLE_COLUMNS = [
   "createdAt",
   "type",
@@ -103,7 +111,7 @@ export default function TransactionTable() {
   }, [visibleColumns]);
 
   const renderCell = useCallback(
-    (transaction: TransactionWithCategory, columnKey: string) => {
+    (transaction: TransactionWithCategory, columnKey: columnKey) => {
       switch (columnKey) {
         case "createdAt":
           if (!transaction?.createdAt) return null;
@@ -120,7 +128,11 @@ export default function TransactionTable() {
           const type = transaction.amount > 0 ? "Income" : "Expense";
           return (
             <Chip
-              className="capitalize"
+              className={`capitalize ${
+                type === "Income"
+                  ? "success"
+                  : "text-danger-700 dark:text-danger-700"
+              }`}
               color={type === "Income" ? "success" : "danger"}
               size="sm"
               variant="flat"
@@ -181,14 +193,14 @@ export default function TransactionTable() {
             </div>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-default-400 text-small">
+            <span className="text-default-700 text-small">
               {state.notes ? "Found" : "Total"}{" "}
               {totalTransactions.toLocaleString("en-US")} transactions
             </span>
-            <label className="flex items-center text-default-400 text-small">
+            <label className="flex items-center text-default-700 text-small">
               Rows per page:
               <select
-                className="bg-transparent outline-none text-default-400 text-small"
+                className="bg-transparent outline-none text-default-700 text-small"
                 onChange={({ target }) =>
                   setState((prev) => ({
                     ...prev,
@@ -217,7 +229,8 @@ export default function TransactionTable() {
               {(column) => (
                 <TableColumn
                   key={column.uid}
-                  align={column.uid === "actions" ? "center" : "start"}
+                  className="text-default-700"
+                  align="center"
                   allowsSorting={column.sortable}
                 >
                   {column.name}
@@ -240,7 +253,7 @@ export default function TransactionTable() {
                 <TableRow key={item.id}>
                   {(columnKey) => (
                     <TableCell>
-                      {renderCell(item, columnKey as string)}
+                      {renderCell(item, columnKey as columnKey)}
                     </TableCell>
                   )}
                 </TableRow>
