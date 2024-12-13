@@ -8,9 +8,8 @@ interface PasswordInputProps {
   name: string;
   label: string;
   placeholder: string;
-  isInvalid: boolean;
+  isInvalid?: boolean;
   errorMessage?: string;
-  isRequired?: boolean;
 }
 
 export function PasswordInput({
@@ -19,7 +18,6 @@ export function PasswordInput({
   placeholder,
   isInvalid,
   errorMessage,
-  isRequired,
 }: PasswordInputProps): React.ReactElement {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => {
@@ -33,8 +31,8 @@ export function PasswordInput({
       placeholder={placeholder}
       isInvalid={isInvalid}
       errorMessage={errorMessage}
-      isRequired={isRequired}
       variant="bordered"
+      validationBehavior="aria"
       type={isVisible ? "text" : "password"}
       endContent={
         <button type="button" onClick={toggleVisibility}>

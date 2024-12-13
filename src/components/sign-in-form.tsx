@@ -20,6 +20,7 @@ export default function SignInForm() {
         placeholder="Enter your email"
         type="text"
         variant="bordered"
+        validationBehavior="aria"
         isInvalid={!!formState?.errors.email}
         errorMessage={formState?.errors.email?.join(", ")}
       />

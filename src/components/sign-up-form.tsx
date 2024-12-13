@@ -19,7 +19,7 @@ export default function SignUpForm() {
         placeholder="Enter your username"
         type="text"
         variant="bordered"
-        isRequired
+        validationBehavior="aria"
         isInvalid={!!formState.errors.username}
         errorMessage={formState.errors.username?.join(", ")}
       />
@@ -29,7 +29,7 @@ export default function SignUpForm() {
         placeholder="Enter your email"
         type="text"
         variant="bordered"
-        isRequired
+        validationBehavior="aria"
         isInvalid={!!formState.errors.email}
         errorMessage={formState.errors.email?.join(", ")}
       />
@@ -37,7 +37,6 @@ export default function SignUpForm() {
         name="password"
         label="Password"
         placeholder="Enter your password"
-        isRequired
         isInvalid={!!formState.errors.password}
         errorMessage={formState.errors.password?.join(", ")}
       />
@@ -45,7 +44,6 @@ export default function SignUpForm() {
         name="password2"
         label="Confirm Password"
         placeholder="Confirm your password"
-        isRequired
         isInvalid={!!formState.errors.password2}
         errorMessage={formState.errors.password2?.join(", ")}
       />
