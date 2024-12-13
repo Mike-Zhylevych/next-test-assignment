@@ -53,6 +53,14 @@ const menuItems = [
   },
 ];
 
+function getOptimizedImageUrl(url?: string | null): string | null {
+  if (!url) return null;
+  if (url.includes("githubusercontent") || url.includes("gravatar.com")) {
+    return `${url}&s=50`;
+  }
+  return url;
+}
+
 export default function HeaderAuth() {
   const session = useSession();
   const currentRoute = usePathname();
@@ -84,7 +92,7 @@ export default function HeaderAuth() {
               <Avatar
                 isBordered
                 as="button"
-                src={session.data.user.image || ""}
+                src={getOptimizedImageUrl(session.data.user.image) || ""}
               />
             </DropdownTrigger>
             <DropdownMenu
