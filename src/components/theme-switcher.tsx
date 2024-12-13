@@ -24,6 +24,7 @@ const ThemeSwitcher = () => {
       color="secondary"
       startContent={<Moon />}
       endContent={<Sun />}
+      aria-label="toggle theme"
     />
   );
 };

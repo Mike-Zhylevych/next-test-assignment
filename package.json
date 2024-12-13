@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env.local -- next dev",
-    "build": "prisma migrate deploy && next build",
+    "build:dev": "dotenv -e .env.local prisma migrate deploy && next build",
+    "build:prod": "prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",
@@ -35,6 +36,8 @@
     "@nextui-org/table": "^2.2.3",
     "@nextui-org/theme": "^2.2.11",
     "@nextui-org/user": "^2.2.3",
+    "@prisma/client": "^5.5.2",
+    "prisma": "^5.5.2",
     "apexcharts": "^4.2.0",
     "bcryptjs": "^2.4.3",
     "dotenv-cli": "^7.4.4",

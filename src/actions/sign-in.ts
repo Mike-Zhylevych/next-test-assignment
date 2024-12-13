@@ -18,7 +18,7 @@ interface SignUserInErrors {
 export async function emailSignIn(
   _: SignUserInErrors,
   formData: FormData
-): Promise<SignUserInErrors | void> {
+): Promise<SignUserInErrors> {
   const email = formData.get("email");
   const password = formData.get("password");
 

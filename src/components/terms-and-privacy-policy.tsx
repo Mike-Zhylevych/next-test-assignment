@@ -14,16 +14,15 @@ import { Link } from "@nextui-org/link";
 
 export default function TermsAndPrivacyPolicy() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleOpen = () => {
-    onOpen();
-  };
   return (
     <>
       <div className="flex items-center justify-between px-1 py-2">
         <Checkbox name="agree" size="sm">
           I agree with the{" "}
-          <Link onClick={handleOpen}>Terms and Privacy Policy</Link>
         </Checkbox>
+        <Link className="cursor-pointer" onPress={onOpen}>
+          Terms and Privacy Policy
+        </Link>
       </div>
       <Modal
         backdrop="blur"
