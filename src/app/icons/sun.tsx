@@ -1,4 +1,6 @@
-export function Sun(props: any): JSX.Element {
+import { SVGProps } from "react";
+
+export function Sun(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       aria-hidden="true"

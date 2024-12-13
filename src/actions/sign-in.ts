@@ -2,8 +2,10 @@
 
 import { signIn } from "@/auth";
 import { signInSchema } from "@/schemas";
-import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
 import { redirect } from "next/navigation";
+import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
+import { ThirdPartyError } from "@/auth.config";
+import { THIRD_PARTY_ERROR } from "@/constants";
 
 interface SignUserInErrors {
   errors: {
@@ -38,8 +40,8 @@ export async function emailSignIn(
       password,
       redirect: false,
     });
-  } catch (error: any) {
-    if (error?.code === "3rd-party") {
+  } catch (error: unknown | ThirdPartyError) {
+    if ((error as ThirdPartyError)?.code === THIRD_PARTY_ERROR) {
       return {
         errors: {
           _form: ["You have signed up with a third-party provider"],

@@ -72,7 +72,7 @@ export default async function Header() {
         </NavbarItem>
         {session?.user && (
           <NavbarItem className="hidden sm:flex">
-            <HeaderAuth image={session?.user?.image} />
+            <HeaderAuth user={session?.user} />
           </NavbarItem>
         )}
       </NavbarContent>

@@ -1,4 +1,6 @@
-export const Search = (props: any): JSX.Element => {
+import { SVGProps } from "react";
+
+export const Search = (props: SVGProps<SVGSVGElement>): JSX.Element => {
   return (
     <svg
       aria-hidden="true"

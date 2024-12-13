@@ -3,6 +3,7 @@ import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import { signInSchema } from "@/schemas";
 import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
+import { THIRD_PARTY_ERROR } from "@/constants";
 
 jest.mock("@/auth", () => ({
   signIn: jest.fn(),
@@ -69,7 +70,7 @@ describe("emailSignIn", () => {
     };
 
     (signInSchema.safeParse as jest.Mock).mockReturnValue(validationResult);
-    (signIn as jest.Mock).mockRejectedValue({ code: "3rd-party" });
+    (signIn as jest.Mock).mockRejectedValue({ code: THIRD_PARTY_ERROR });
 
     const result = await emailSignIn({ errors: {} }, formData);
     expect(signIn).toHaveBeenCalledWith("credentials", {

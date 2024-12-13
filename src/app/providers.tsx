@@ -3,7 +3,6 @@
 import { NextUIProvider } from "@nextui-org/system";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { Suspense } from "react";
 
 interface ProvidersProps {
   children: React.ReactNode;

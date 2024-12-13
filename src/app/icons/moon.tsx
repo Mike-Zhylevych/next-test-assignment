@@ -1,4 +1,6 @@
-export function Moon(props: any): JSX.Element {
+import { SVGProps } from "react";
+
+export function Moon(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       aria-hidden="true"

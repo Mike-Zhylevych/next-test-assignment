@@ -22,11 +22,10 @@ import {
 } from "@nextui-org/dropdown";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
-import { DEFAULT_ROWS_PER_PAGE } from "@/constants";
-import { Transaction, Category } from "@prisma/client";
-
 import { Pagination } from "@nextui-org/pagination";
 import { Chip } from "@nextui-org/chip";
+import { DEFAULT_ROWS_PER_PAGE } from "@/constants";
+import type { Transaction, Category } from "@prisma/client";
 
 const columns = [
   { name: "DATE", uid: "createdAt", sortable: false },
@@ -85,7 +84,7 @@ export default function TransactionTable() {
 
   useEffect(() => {
     fetchData(state.page, state.limit, state.notes);
-  }, [state.page, state.limit, state.notes]);
+  }, [state.page, state.limit, state.notes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSearchChange = useDebounce((value?: string) => {
     setState((prev) => ({ ...prev, notes: value || "", page: 1 }));

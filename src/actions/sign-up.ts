@@ -61,7 +61,8 @@ export async function signUp(
         password: hashedPassword,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    console.error(error);
     return {
       errors: {
         _form: ["Failed to create a new user"],
@@ -75,7 +76,8 @@ export async function signUp(
       password,
       redirect: false,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    console.error(error);
     return {
       errors: {
         _form: ["Failed to sign in the user"],

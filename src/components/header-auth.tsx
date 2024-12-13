@@ -1,26 +1,49 @@
-import { Button } from "@nextui-org/button";
+"use client";
+
 import { Avatar } from "@nextui-org/avatar";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/dropdown";
 
 import * as actions from "@/actions";
 
 interface HeaderAuthProps {
-  image?: string | null;
+  user: {
+    image?: string | null;
+    email?: string | null;
+    name?: string | null;
+  };
 }
 
-export default function HeaderAuth({ image }: HeaderAuthProps) {
+export default function HeaderAuth({ user }: HeaderAuthProps) {
   return (
-    <Popover placement="left">
-      <PopoverTrigger>
-        <Avatar src={image || ""} />
-      </PopoverTrigger>
-      <PopoverContent>
-        <div className="p-4">
-          <form action={actions.signOut}>
-            <Button type="submit">Sign Out</Button>
-          </form>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <Dropdown>
+      <DropdownTrigger>
+        <Avatar isBordered as="button" src={user.image || ""} />
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Static Actions" disabledKeys={["profile"]}>
+        <DropdownItem
+          key="profile"
+          isReadOnly
+          className="h-14 gap-2 opacity-100"
+          textValue="Profile"
+        >
+          <div>{user.name}</div>
+          <div className="text-xs">{user.email}</div>
+        </DropdownItem>
+        <DropdownItem
+          key="sign-out"
+          className="text-danger"
+          color="danger"
+          onPress={async () => actions.signOut()}
+        >
+          Sign Out
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   );
 }

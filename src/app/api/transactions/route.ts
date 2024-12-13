@@ -1,6 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-
+import { NextRequest, NextResponse } from "next/server";
 import { DEFAULT_ROWS_PER_PAGE } from "@/constants";
 
 export async function GET(req: NextRequest) {
@@ -34,6 +33,7 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json({ transactions, totalTransactions });
   } catch (error) {
+    console.error("Failed to fetch transactions", error);
     return NextResponse.json(
       { error: "Failed to fetch transactions" },
       { status: 500 }
