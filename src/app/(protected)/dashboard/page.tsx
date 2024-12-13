@@ -19,7 +19,7 @@ export default async function Dashboard() {
   });
 
   // Get monthly expences and income of the last year
-  const lastYeartransactions = await db.transaction.findMany({
+  const lastYearTransactions = await db.transaction.findMany({
     include: {
       category: true,
     },
@@ -31,12 +31,12 @@ export default async function Dashboard() {
   });
 
   // Get monthly expences and income of the last year
-  const lastYearExpences = lastYeartransactions.filter(
+  const lastYearExpences = lastYearTransactions.filter(
     ({ amount }) => amount < 0
   );
 
   // Get monthly expences and income of the last year
-  const lastYearIncome = lastYeartransactions.filter(
+  const lastYearIncome = lastYearTransactions.filter(
     ({ amount }) => amount > 0
   );
 

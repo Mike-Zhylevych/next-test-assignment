@@ -23,7 +23,7 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
 }
 
 // Custom error for third-party sign-in
-class ThirdPartyError extends CredentialsSignin {
+export class ThirdPartyError extends CredentialsSignin {
   code = "3rd-party";
 }
 
