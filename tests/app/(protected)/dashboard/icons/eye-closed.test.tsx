@@ -38,7 +38,7 @@ describe("EyeClosed Component", () => {
     expect(svgElement).toHaveAttribute("fill", "red");
 
     const pathElement = container.querySelector("path");
-    expect(pathElement).toHaveAttribute("fill", "currentColor"); // As per the component
+    expect(pathElement).toHaveAttribute("fill", "currentColor");
   });
 
   it("matches the snapshot", () => {

@@ -84,7 +84,6 @@ describe("emailSignIn", () => {
       },
     });
 
-    //
     (signIn as jest.Mock).mockRejectedValue({});
     const wrongCredentialsResult = await emailSignIn({ errors: {} }, formData);
     expect(wrongCredentialsResult).toEqual({

@@ -20,7 +20,6 @@ describe("SubmitButton Component", () => {
     expect(button).toBeInTheDocument();
     expect(button).not.toBeDisabled();
     expect(button).toHaveAttribute("type", "submit");
-    // expect(button).toHaveAttribute("color", "primary");
     expect(button).not.toHaveAttribute("data-loading");
   });
 
@@ -33,7 +32,6 @@ describe("SubmitButton Component", () => {
     expect(button).toBeInTheDocument();
     expect(button).toBeDisabled();
     expect(button).toHaveAttribute("type", "submit");
-    // expect(button).toHaveAttribute("disabled", "true");
     // Check if the button shows a loading state
     expect(button).toHaveAttribute("data-loading", "true");
   });

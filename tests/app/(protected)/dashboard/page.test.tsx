@@ -4,6 +4,7 @@ import Dashboard from "../../../../src/app/(protected)/dashboard/page";
 import { DonutChart, AreaChart } from "../../../../src/components/charts";
 import { db } from "../../../../src/db";
 import { usePathname } from "next/navigation";
+import { DEFAULT_LOGGED_IN_REDIRECT } from "@/routes";
 
 // Mock for usePathname hook
 jest.mock("next/navigation", () => ({
@@ -30,7 +31,7 @@ jest.mock("../../../../src/db", () => ({
 }));
 
 beforeEach(() => {
-  (usePathname as jest.Mock).mockReturnValue("/dashboard"); // Return a valid pathname
+  (usePathname as jest.Mock).mockReturnValue(DEFAULT_LOGGED_IN_REDIRECT);
 });
 
 describe("Dashboard", () => {

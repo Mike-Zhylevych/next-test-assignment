@@ -89,8 +89,6 @@ describe("signUp", () => {
     formData.append("password", mockPassword);
     formData.append("password2", mockPassword);
 
-    // test if this function returns NEXT_REDIRECT
-    // expect(
     await signUp(
       {
         errors: {
