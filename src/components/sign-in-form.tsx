@@ -37,10 +37,10 @@ export default function SignInForm() {
         </div>
       )}
       <div className="flex items-center justify-between px-1 py-2">
-        <Checkbox name="remember" size="sm">
+        <Checkbox name="remember" size="sm" isDisabled>
           Remember me
         </Checkbox>
-        <Link className="text-default-500" href="#" size="sm">
+        <Link className="text-default-500" href="#" size="sm" isDisabled>
           Forgot password?
         </Link>
       </div>

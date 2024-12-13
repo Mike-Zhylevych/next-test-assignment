@@ -17,7 +17,6 @@ export function AreaChart({ expences, income }: AreaChartProps) {
 
   const defaultOptions = {
     chart: {
-      type: "area",
       toolbar: {
         show: false,
       },
@@ -34,10 +33,6 @@ export function AreaChart({ expences, income }: AreaChartProps) {
     tooltip: {
       enabled: true,
       theme: theme === "dark" ? "dark" : "light",
-    },
-    labels: {
-      colors: "#fff",
-      useSeriesColors: true,
     },
     xaxis: {
       labels: {
@@ -62,7 +57,7 @@ export function AreaChart({ expences, income }: AreaChartProps) {
 
   const [chartData, setChartData] = useState<{
     series: { name: string; data: { x: string; y: number }[] }[];
-    options: {};
+    options: ApexCharts.ApexOptions | undefined;
   }>({
     series: [],
     options: defaultOptions,
@@ -103,7 +98,7 @@ export function AreaChart({ expences, income }: AreaChartProps) {
       },
     };
     setChartData(newChartDataOptions);
-  }, [theme]);
+  }, [theme]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const incomeSet = Object.entries(income).map(([month, amount]) => ({
@@ -132,7 +127,7 @@ export function AreaChart({ expences, income }: AreaChartProps) {
         },
       ],
     });
-  }, [expences]);
+  }, [expences, income]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mounted) {
     return null;

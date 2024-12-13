@@ -7,7 +7,7 @@ type IconSvgProps = SVGProps<SVGSVGElement> & {
 export const ChevronDown = ({
   strokeWidth = 1.5,
   ...otherProps
-}: IconSvgProps) => {
+}: IconSvgProps): JSX.Element => {
   return (
     <svg
       aria-hidden="true"

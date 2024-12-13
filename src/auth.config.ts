@@ -8,6 +8,7 @@ import type { NextAuthConfig } from "next-auth";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
+import { THIRD_PARTY_ERROR } from "@/constants";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
@@ -24,7 +25,7 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
 
 // Custom error for third-party sign-in
 export class ThirdPartyError extends CredentialsSignin {
-  code = "3rd-party";
+  code = THIRD_PARTY_ERROR;
 }
 
 export default {
@@ -38,10 +39,11 @@ export default {
       clientSecret: GITHUB_CLIENT_SECRET,
     }),
     Credentials({
-      async authorize(
-        credentials: any
-      ): Promise<User | null | ThirdPartyError> {
-        const { email, password } = credentials;
+      async authorize(credentials): Promise<User | null | ThirdPartyError> {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
 
         // Validate the form data
         const user = await db.user.findUnique({

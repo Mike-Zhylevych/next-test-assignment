@@ -45,7 +45,8 @@ export function DonutChart({ expences }: DonutChartProps) {
               label: "Total",
               fontSize: "22px",
               fontWeight: 600,
-              formatter: function (w: any) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              formatter: function (w: any): string {
                 const sum = w?.globals?.seriesTotals?.reduce(
                   (a: number, b: number) => {
                     return a + b;
@@ -75,7 +76,7 @@ export function DonutChart({ expences }: DonutChartProps) {
   };
   const [chartData, setChartData] = useState<{
     series: number[];
-    options: {};
+    options: ApexCharts.ApexOptions | undefined;
   }>({
     series: [],
     options: defaultOptions,
@@ -99,7 +100,7 @@ export function DonutChart({ expences }: DonutChartProps) {
       },
     };
     setChartData(newChartDataOptions);
-  }, [expences]);
+  }, [expences]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mounted) {
     return null;
