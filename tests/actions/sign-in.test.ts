@@ -118,7 +118,7 @@ describe("emailSignIn", () => {
       redirect: false,
     });
 
-    expect(redirect).toHaveBeenCalledWith("/dashboard");
+    expect(redirect).toHaveBeenCalledWith(DEFAULT_LOGGED_IN_REDIRECT);
     expect(result).toBeUndefined();
   });
 });
